@@ -1,0 +1,102 @@
+---
+title: "Short-Form Content Platform"
+publishedAt: "2026-08-25"
+summary: "A twelve-stage pipeline that carries a source clip to a published short, with a human approval gate before anything ships."
+# TODO(razvan): no screenshots exist yet. Add them to /public/images/projects/short-form-content-platform/
+# as WebP at ~1600px (SPEC.md §12 #16), then list them here. images[0] is BOTH the detail-page hero and
+# carousel slide 1. Until then this array stays empty and both the hero and the carousel render nothing.
+# TODO(razvan): SPEC.md §11 Q11 — this is a private repo on your machine. Before publishing any
+# screenshot, confirm you are permitted to show the dashboard, the pipeline internals and any source
+# content visible in the frames.
+images: []
+team:
+  - name: "Razvan Calota"
+    role: "Sole author and architect"
+    avatar: "/images/avatar.jpeg"
+    linkedIn: "https://www.linkedin.com/in/razvan-calota-63492424a/"
+# TODO(razvan): the repo is private (~/Documents/autmated content creation). Decide what, if anything,
+# is public, then put the URL here to light up the "View project" link on the card.
+link: ""
+---
+
+## Overview
+
+A pnpm and Turborepo monorepo that takes a source clip and carries it to a published short.
+The system is 541 files across eight packages: a NestJS API with health probes and an OpenAPI
+surface, a BullMQ worker running one processor per pipeline stage, a Next.js review dashboard,
+a Remotion renderer, a source-adapter registry, a shared core package holding the domain types,
+a Zod environment contract and nine scoring signal extractors, and an MCP server exposing
+score_candidate, dedupe_check and select_daily_winner as tools. Data lives in Supabase Postgres
+behind a Drizzle schema with row-level security on every table, asserted in CI alongside a
+quality gate and a migration format guard.
+
+The pipeline runs in twelve stages: ingest, score, select, script, voice, align, visual, render,
+human review, publish, measure, feedback. The review gate sits between render and publish and is
+not optional — nothing reaches an audience without a person clearing it first.
+
+Implementation was agent-assisted. What is mine is the architecture and the direction: where each
+stage boundary sits, why the review gate is a gate rather than a report, row-level security as a
+default rather than an afterthought, the Zod environment contract, and the decision to expose
+scoring and selection as MCP tools instead of burying them inside the worker.
+
+TODO(razvan): decide how much of the paragraph above you want on the page. It is all established
+in OWNERSHIP.md, but it is dense. One or two paragraphs reads better than three.
+
+## Third Party Integrations
+
+TODO(razvan): one H3 per service, each with a short bulleted list of what it does here and why it
+was chosen. The services below are the ones OWNERSHIP.md establishes are in the repo. Nothing has
+been written under them because the specifics — models, plans, quotas, failure modes — are not
+measured anywhere and must not be guessed.
+
+### Supabase
+
+TODO(razvan): what Postgres holds, how RLS policies are shaped, how migrations are applied.
+
+### Redis and BullMQ
+
+TODO(razvan): queue topology, per-stage retry and failure boundaries, what a dead-lettered job looks like.
+
+### Remotion
+
+TODO(razvan): what the composition renders, where it runs, how long a render takes.
+
+### Model Context Protocol
+
+TODO(razvan): what score_candidate, dedupe_check and select_daily_winner expose, and who calls them.
+
+### TODO(razvan): remaining services
+
+TODO(razvan): the voice, alignment and publishing stages each call something. Name them once you
+are ready to name them.
+
+## Challenges and Learnings
+
+TODO(razvan): one H3 per challenge, prose underneath. Aim for three or four. The strongest ones
+here are architectural, which is exactly where your ownership is strongest — pick problems where
+the interesting part is the decision, not the code.
+
+### TODO(razvan): why twelve stages and not four
+
+TODO(razvan): the stage boundaries are the part of this project you can defend line by line. Write
+down why each cut sits where it does — what retries independently, what a failure at that point
+costs, what a human can usefully inspect there.
+
+### TODO(razvan): the review gate as a gate
+
+TODO(razvan): what happens to a run that stalls at review, and what that constraint cost you
+elsewhere in the design.
+
+### TODO(razvan): row-level security on every table
+
+TODO(razvan): what the CI assertion actually checks, and what it caught.
+
+## Outcome
+
+TODO(razvan): the reference case studies interleave screenshots with H3 sections here. You have
+neither screenshots nor outcome numbers yet.
+
+TODO(razvan): do NOT fill this section with invented numbers. Videos published, runs completed,
+review pass rate, time from ingest to publish — every one of those would be a real, checkable
+figure, and none of them are measured. If no number exists when you come back to this, write the
+outcome qualitatively or cut the section. An empty Outcome is survivable; a fabricated one is not.

@@ -1,0 +1,78 @@
+---
+title: "Multi-Brand Content & AI Platform"
+publishedAt: "2026-09-10"
+summary: "A multi-domain publishing platform combining server-rendered content, headless CMS workflows, technical SEO and an authenticated streaming AI assistant."
+images:
+  - "/images/projects/wellnessinbox/1.png"
+  - "/images/projects/wellnessinbox/2.png"
+  - "/images/projects/wellnessinbox/3.png"
+team:
+  - name: "Razvan Calota"
+    role: "Full-Stack Developer"
+    avatar: "/images/avatar.jpeg"
+    linkedIn: "https://www.linkedin.com/in/razvan-calota-63492424a/"
+link: "https://www.wellnessinbox.com/"
+---
+
+## Overview
+
+A Next.js 14 platform built on React Server Components and TypeScript, designed to serve
+multiple brands from one application rather than one deployment per brand. It runs live as
+WellnessInbox — a health and wellness publication with a newsletter, a category-driven
+article archive and an authenticated AI assistant.
+
+The multi-brand part is not a roadmap item. Middleware reads the incoming `Host` header,
+resolves it against a domain configuration, and writes a `domainInfo` cookie carrying the
+domain type and niche slug. Server Components and application context read from there, so a
+second brand is a configuration entry rather than a fork.
+
+## Third Party Integrations
+
+### Sanity
+
+Content is authored in Sanity and queried with GROQ. Publishing does not wait on a rebuild:
+Sanity webhooks trigger targeted cache revalidation, so an edit goes live without redeploying
+the application or invalidating unrelated routes.
+
+### Supabase
+
+Server-side authentication through `@supabase/ssr`, wired into the same middleware that
+handles domain resolution — so auth state and tenant resolution are settled in one pass
+before any page code runs.
+
+### OpenAI, via the Vercel AI SDK
+
+The Health Assistant streams from an edge-runtime route, gated behind Supabase auth so only
+signed-in readers can reach it.
+
+## Challenges and Learnings
+
+### Email scanners were unsubscribing readers
+
+The unsubscribe endpoint originally acted on `GET`. Email security scanners and link
+prefetchers issue `GET` requests to every URL in a message — so recipients were being
+unsubscribed by software that was merely checking whether the link was safe, without any
+person ever clicking it.
+
+The fix was to make `GET` inert. It now renders a confirmation screen and nothing else; the
+mutation runs only on an explicit `POST` from a button press, which a GET-only crawler never
+triggers.
+
+{/* TODO(razvan): if you know roughly how many subscribers this was silently losing, that
+    number turns a good story into a great one. Only use it if it is real. */}
+
+### Technical SEO as a build concern
+
+Typed JSON-LD, dynamic metadata, RSS, programmatic sitemaps, and Open Graph images generated
+per-route through `ImageResponse` — with the OG endpoint HMAC-signed so it cannot be used as
+an open image-rendering service by anyone who finds the URL.
+
+## Outcome
+
+{/* TODO(razvan): the sitemap on the live site currently emits https://example.com/... — a
+    placeholder base URL that was never replaced. It is a small fix and worth doing before
+    you point anyone at this page, because a reviewer who checks your SEO claims will load
+    /sitemap.xml first. */}
+
+{/* TODO(razvan): what did this project teach you, and what would you build differently?
+    This section does more work than anything above it. */}

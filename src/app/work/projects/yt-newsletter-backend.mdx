@@ -1,0 +1,93 @@
+---
+title: "AI Newsletter Delivery & Operations Platform"
+publishedAt: "2026-05-21"
+summary: "A production email platform that turns content into targeted newsletters, delivers them across multiple providers, measures engagement and revenue, and feeds those results back into the next send."
+# Intentionally imageless. The sending engine and the operations dashboard are private
+# client codebases, and WellnessInbox screenshots belong to the Multi-Brand Content & AI
+# Platform entry, which is the codebase that actually renders that site — showing them
+# here too would imply this project IS that frontend.
+images: []
+team:
+  - name: "Razvan Calota"
+    role: "Contributor"
+    avatar: "/images/avatar.jpeg"
+    linkedIn: "https://www.linkedin.com/in/razvan-calota-63492424a/"
+# TODO(razvan): private client repo. This link almost certainly stays empty.
+link: "https://www.wellnessinbox.com/"
+---
+
+## Overview
+
+A six-author production email platform I contributed to between August 2024 and May 2026,
+authoring 70 of its 1,068 commits and pairing with a coworker from July 2025. I did not build the
+sending engine, and this page does not claim otherwise.
+
+My scope was ad-network and brand integration, configuration of the email service provider send
+consumers, and segmentation for scheduled sends. In practice that meant onboarding new advertisers
+and brands through the ad entity and the email service, wiring and configuring the Postmark,
+Mailgun and Resend consumers — including the Resend migration — and building the recipient
+segmentation that decides who a scheduled provider send goes to. The files I touched most were the
+Postmark and Mailgun send consumers, the email service, the cron scheduler and the webhook
+controller. Two commits went to the OpenAI service that rewrites subject lines to reduce spam
+scoring, and one maintenance script restores ad titles and calls to action from CSV.
+
+TODO(razvan): decide the public name for this project. content-spec.md D4 leaves it open between
+"WellnessInbox" and "yt-newsletter", and the title in the frontmatter above is a neutral
+placeholder, not a decision. Blocked on D3 alongside the disclosure question.
+
+TODO(razvan): confirm the framework. The file naming strongly suggests NestJS, but OWNERSHIP.md
+only establishes TypeScript and the three providers. Do not list a stack you have not checked.
+
+## Third Party Integrations
+
+TODO(razvan): this is the section where a contribution case study is strongest, because provider
+integration is literally what you did. One H3 per provider, each a bulleted list of what you
+configured and what went wrong. Write it from the commits, not from memory.
+
+### Postmark
+
+TODO(razvan): what the send consumer does, what per-brand configuration it takes, what the
+webhooks feed back into.
+
+### Mailgun
+
+TODO(razvan): same shape as above, plus what differs from Postmark and why both exist.
+
+### Resend
+
+TODO(razvan): the migration. What moved, what broke, what the fix was.
+
+### Ad networks and brands
+
+TODO(razvan): the integration shape — what an ad network needs in order to be onboarded, and what
+a brand adds on top of it. Name nothing until D3 is resolved; describe the shape instead.
+
+## Challenges and Learnings
+
+TODO(razvan): one H3 per challenge, prose underneath. Two or three is enough for a contribution
+entry. Keep the frame honest — "here is a specific problem I owned inside a larger system" is a
+stronger story than an implied claim on the whole platform.
+
+### TODO(razvan): running three email providers at once
+
+TODO(razvan): why a second and then a third provider existed, and what configuration had to be
+duplicated across consumers.
+
+### TODO(razvan): segmenting a scheduled send
+
+TODO(razvan): how recipients get selected, and what made it harder than a WHERE clause.
+
+### TODO(razvan): contributing to a codebase you did not design
+
+TODO(razvan): optional, and only if you want it. The honest version of this — how you got useful
+inside a 1,000-commit codebase written mostly by someone else — is a genuinely good interview
+answer. It is also the most senior thing on this page.
+
+## Outcome
+
+TODO(razvan): no outcome numbers are established for this project, and the ones that would matter
+most — send volume, deliverability change, revenue processed — are the ones most likely to be
+confidential. Resolve D3 first.
+
+TODO(razvan): if the numbers cannot be published, describe the outcome in shape rather than
+magnitude, and be careful to keep it scoped to your contribution rather than the platform's.

@@ -1,0 +1,78 @@
+---
+title: "QR Advanced"
+publishedAt: "2026-09-09"
+summary: "A dynamic QR platform where the destination is a routing decision made at scan time, not a value baked into the print run."
+images:
+  - "/images/projects/qr-advanced/1.png"
+  - "/images/projects/qr-advanced/2.png"
+  - "/images/projects/qr-advanced/3.png"
+  - "/images/projects/qr-advanced/4.png"
+team:
+  - name: "Razvan Calota"
+    role: "Sole developer"
+    avatar: "/images/avatar.jpeg"
+    linkedIn: "https://www.linkedin.com/in/razvan-calota-63492424a/"
+link: "https://qradvanced.com/"
+---
+
+## Overview
+
+A static QR code commits you to one destination the moment it goes to print. If the campaign
+moves, the landing page changes, or the offer expires, the printed run is dead — and reprinting
+is the only fix.
+
+QR Advanced puts a routing layer behind the code instead. The printed symbol stays fixed; where
+it resolves is decided at scan time, and can be changed after the codes are already in the wild.
+The same code can send an iPhone somewhere different from an Android, a scan in one country
+somewhere different from another, and a scan on Saturday somewhere different from Tuesday.
+
+Around that sit campaign management, a landing page builder, and scan analytics with conversion
+tracking. It is a Next.js application on Vercel, with a marketing site of twenty-plus routes
+covering six feature areas and six industry solutions.
+
+## Routing
+
+The routing engine is the product. Four dimensions, composable:
+
+- **Destination** — repoint any dynamic code without touching the printed artifact
+- **Geography** — resolve by country
+- **Device** — split iOS and Android to their respective stores
+- **Schedule** — time-based rules, so a code can change behaviour without anyone intervening
+
+A/B splitting sits on top of the same engine and is gated to the paid tiers.
+
+{/* TODO(razvan): this section describes behaviour visible from the public site. If you want it
+    to describe the *implementation* — how rules are evaluated, where the redirect resolves,
+    what the p99 on a scan looks like — that detail has to come from you, or from the repo. */}
+
+## Analytics
+
+Scans are recorded with conversion tracking rather than raw counts, and analytics retention is
+one of the tier boundaries: 7 days on free, 30 on Pro, 90 on Advanced, unlimited on Enterprise.
+CSV export unlocks at Advanced.
+
+## Pricing
+
+Four tiers, structured around dynamic scan volume rather than the number of codes — every tier
+including free gets unlimited QR codes, so the free tier stays genuinely usable rather than
+being a demo:
+
+| Tier | Price | Dynamic scans/day | Notable |
+| --- | --- | --- | --- |
+| Free | $0 | 50 | 1 destination per code, 7-day retention |
+| Pro | $24/mo | 300 | 3 destinations, basic rules engine, 3 seats |
+| Advanced | $79/mo | 1,000 | Full rules engine, unlimited destinations, CSV export |
+| Enterprise | Custom | Custom | API access, webhooks, custom domains, white label |
+
+All tiers include SSL and GDPR compliance.
+
+{/* TODO(razvan): the numbers above are read off the live pricing page, so they are safe.
+    Anything about real usage — scan volume, signups, revenue, conversion rate — has to come
+    from you. Do not let me invent one; content-spec.md §6 forbids it and it is the exact
+    claim an interviewer will probe. */}
+
+## Outcome
+
+{/* TODO(razvan): this is the section that will do the most work for you, and it is the one
+    I cannot write. What did building and shipping this teach you, and what would you do
+    differently? If the product has real users, that belongs here too. */}

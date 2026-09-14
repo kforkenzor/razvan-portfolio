@@ -1,0 +1,105 @@
+/* ==========================================================================
+ * custom.css — the only hand-written global stylesheet in the app.
+ *
+ * Loaded after @once-ui-system/core's tokens.css and styles.css, so anything
+ * here wins. Keep it small: Once UI already ships box-sizing, scroll-behavior,
+ * heading scroll-margin-top and ::selection, and duplicating them here only
+ * creates two places to look.
+ *
+ * SPEC.md §4.10 documents the reference site's version of this file: eleven
+ * rules, seven of which match nothing, and one ([class*=display]) that leaks
+ * a letter-spacing override onto every element on the page. None of that is
+ * reproduced. What is here is the two things Once UI does NOT provide and
+ * SPEC.md §12 says to add.
+ * ========================================================================== */
+
+/* --------------------------------------------------------------------------
+ * SPEC.md §12 #19 — declare color-scheme.
+ *
+ * Without it, native scrollbars, form controls, date pickers and the canvas
+ * behind the page stay light while the site is dark. Three declarations,
+ * because the theme has three states: the `system` default (no data-theme
+ * attribute resolved yet, or resolved by the inline script in layout.tsx) and
+ * the two explicit choices the toggle writes.
+ * -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+ * SPEC.md §12 #18 — the skip link.
+ *
+ * First focusable element in the body (see layout.tsx). Off-screen until it
+ * takes focus, then it parks itself over the header. Without it a keyboard
+ * user tabs the entire header on every single route before reaching content.
+ * -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: var(--static-space-8);
+  left: var(--static-space-8);
+  z-index: 10;
+  padding: var(--static-space-8) var(--static-space-16);
+  border: 1px solid var(--neutral-border-strong);
+  border-radius: var(--radius-m);
+  background: var(--page-background);
+  color: var(--neutral-on-background-strong);
+  font-family: var(--font-label);
+  font-size: var(--font-size-label-s);
+  text-decoration: none;
+
+  /* Visually hidden, but still focusable and still announced. `display: none`
+     or `visibility: hidden` would take it out of the tab order entirely. */
+  transform: translateY(-200%);
+  opacity: 0;
+}
+
+.skip-link:focus-visible,
+.skip-link:focus {
+  transform: translateY(0);
+  opacity: 1;
+  outline: var(--static-space-2) solid var(--brand-solid-strong);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+ * SPEC.md §12 #6 / §7.11 — honour prefers-reduced-motion.
+ *
+ * The reference site has zero `prefers-reduced-motion` rules in any of its six
+ * stylesheets: the hero blur-wipe, the badge sheen and the spinner all run
+ * regardless of the OS setting. This is the documented three-line fix, and it
+ * is the most actionable accessibility gap in the whole teardown.
+ * -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * TODO(razvan): custom colour schemes, if you ever want one.
+ *
+ * `style.brand` / `style.accent` / `style.neutral` in once-ui.config.ts are
+ * currently set to Once UI's own named schemes (cyan / red / gray), which is
+ * why nothing is overridden here. To hand-pick a palette instead, set the
+ * relevant config value to "custom", generate the ramp at
+ * https://once-ui.com/customize, and paste the --scheme-* variables into a
+ * :root block below.
+ *
+ * The template shipped this block as a comment nested inside another comment,
+ * which is not valid CSS — the outer comment closed early and roughly forty
+ * declarations leaked out into the stylesheet at top level. It has been
+ * removed rather than repaired.
+ * -------------------------------------------------------------------------- */
