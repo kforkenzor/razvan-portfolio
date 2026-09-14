@@ -11,10 +11,20 @@ import type {
  * Absolute origin used for canonical URLs, OG tags and JSON-LD.
  *
  * Read from the environment so preview deploys self-reference correctly
- * (SPEC.md §11 Q4). Set NEXT_PUBLIC_SITE_URL in the deploy environment.
+ * (SPEC.md §11 Q4). Resolution order:
+ *
+ *   1. NEXT_PUBLIC_SITE_URL — set this to the real domain in production.
+ *   2. NEXT_PUBLIC_VERCEL_URL — injected per-deployment by Vercel, so preview
+ *      builds self-reference their own URL instead of advertising production.
+ *      It arrives without a scheme, hence the https:// prefix.
+ *   3. localhost, for local dev.
+ *
  * TODO(razvan): set NEXT_PUBLIC_SITE_URL to the real domain once it exists.
  */
-const baseURL: string = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const vercelURL = process.env.NEXT_PUBLIC_VERCEL_URL;
+const baseURL: string =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (vercelURL ? `https://${vercelURL}` : "http://localhost:3000");
 
 const routes: RoutesConfig = {
   "/": true,
