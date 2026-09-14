@@ -10,21 +10,48 @@ import type {
 /**
  * Absolute origin used for canonical URLs, OG tags and JSON-LD.
  *
- * Read from the environment so preview deploys self-reference correctly
- * (SPEC.md §11 Q4). Resolution order:
+ * Resolution order, first usable value wins:
  *
- *   1. NEXT_PUBLIC_SITE_URL — set this to the real domain in production.
+ *   1. NEXT_PUBLIC_SITE_URL — the real domain, set per deploy environment.
  *   2. NEXT_PUBLIC_VERCEL_URL — injected per-deployment by Vercel, so preview
  *      builds self-reference their own URL instead of advertising production.
- *      It arrives without a scheme, hence the https:// prefix.
- *   3. localhost, for local dev.
+ *   3. http://localhost:3000, for local dev.
+ *
+ * "Usable" is doing real work here. An env var that is *defined but empty* is
+ * the default state of a Vercel project whose variable was imported from
+ * `.env.example` and never filled in, and `??` does not catch `""`. An empty
+ * baseURL reaches Once UI's `Meta.generate`, which does
+ * `new URL(base.startsWith("https://") ? base : \`https://${base}\`)` — that is
+ * `new URL("https://")`, which throws ERR_INVALID_URL and fails the build while
+ * prerendering `/`. So every candidate is trimmed, rejected when blank, given a
+ * scheme when it lacks one (Vercel supplies bare hostnames), and parsed before
+ * it is trusted.
  *
  * TODO(razvan): set NEXT_PUBLIC_SITE_URL to the real domain once it exists.
  */
-const vercelURL = process.env.NEXT_PUBLIC_VERCEL_URL;
-const baseURL: string =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (vercelURL ? `https://${vercelURL}` : "http://localhost:3000");
+function resolveBaseURL(): string {
+  // Written as literal `process.env.X` member expressions so the bundler can
+  // inline them for the client. Do not refactor into dynamic lookups.
+  const candidates = [process.env.NEXT_PUBLIC_SITE_URL, process.env.NEXT_PUBLIC_VERCEL_URL];
+
+  for (const candidate of candidates) {
+    const value = candidate?.trim();
+    if (!value) continue;
+
+    const withScheme = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    try {
+      const { origin, hostname } = new URL(withScheme);
+      // `new URL("https://")` throws, but guard the empty-host case anyway.
+      if (hostname) return origin;
+    } catch {
+      // Unparseable: fall through to the next candidate.
+    }
+  }
+
+  return "http://localhost:3000";
+}
+
+const baseURL: string = resolveBaseURL();
 
 const routes: RoutesConfig = {
   "/": true,
