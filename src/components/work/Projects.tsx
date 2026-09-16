@@ -20,7 +20,17 @@ export function getProjects({ range, exclude }: ProjectsProps = {}): Post[] {
     allProjects = allProjects.filter((post) => !exclude.includes(post.slug));
   }
 
+  /* `order` wins when a file declares it; everything else stays newest-first.
+     Mixed lists are well defined: an ordered entry outranks an unordered one, so
+     adding `order` to a single file does not scramble the rest. */
   const sortedProjects = allProjects.sort((a, b) => {
+    const aOrder = a.metadata.order;
+    const bOrder = b.metadata.order;
+
+    if (aOrder !== undefined && bOrder !== undefined) return aOrder - bOrder;
+    if (aOrder !== undefined) return -1;
+    if (bOrder !== undefined) return 1;
+
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 

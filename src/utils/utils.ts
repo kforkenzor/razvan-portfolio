@@ -13,6 +13,14 @@ type Metadata = {
   title: string;
   subtitle?: string;
   publishedAt: string;
+  /**
+   * Explicit position in the /work list, ascending, overriding the date sort.
+   * Optional: a file without it keeps falling back to newest-first. It exists
+   * because display order and publication date are different questions, and
+   * `publishedAt` is not free to bend — it renders on the page and feeds
+   * `datePublished`/`dateModified` in the case study's JSON-LD.
+   */
+  order?: number;
   summary: string;
   image?: string;
   images: string[];
@@ -42,6 +50,9 @@ function readMDXFile(filePath: string) {
     title: data.title || "",
     subtitle: data.subtitle || "",
     publishedAt: data.publishedAt,
+    // Only a real number counts. A missing or malformed `order` must fall through
+    // to the date sort rather than becoming NaN and poisoning the comparator.
+    order: typeof data.order === "number" && Number.isFinite(data.order) ? data.order : undefined,
     summary: data.summary || "",
     image: data.image || "",
     images: data.images || [],

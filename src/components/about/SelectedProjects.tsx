@@ -1,5 +1,6 @@
-import { Button, Column, Heading, Row, Tag, Text } from "@once-ui-system/core";
+import { Button, Column, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
 import type { Project } from "@/types";
+import { getProjectPosts } from "@/utils/utils";
 import { filterByEvidenceGate } from "./evidence";
 import { OwnershipBlock } from "./OwnershipBlock";
 
@@ -30,6 +31,17 @@ export function SelectedProjects({ title, projects }: SelectedProjectsProps) {
   // THE GATE.
   const visible = filterByEvidenceGate(projects);
 
+  /* Hero screenshots come from the case study's own frontmatter rather than from a
+     second `images` field on Project. One source of truth: the .mdx already lists the
+     screenshots for /work, and duplicating those paths into content.tsx guarantees the
+     two drift. A project with no case study, or one with `images: []`, simply has no
+     hero — same rule the carousel on /work follows. */
+  const heroBySlug = new Map(
+    getProjectPosts()
+      .filter((post) => post.metadata.images?.[0])
+      .map((post) => [post.slug, post.metadata.images[0]] as const),
+  );
+
   if (visible.length === 0) return null;
 
   return (
@@ -42,84 +54,101 @@ export function SelectedProjects({ title, projects }: SelectedProjectsProps) {
           <Column
             key={project.slug}
             fillWidth
-            gap="16"
-            padding="l"
             radius="l"
             border="neutral-alpha-weak"
             background="surface"
+            overflow="hidden"
           >
-            {/* Name + one-line summary. The id follows SPEC.md §3.7.10's
+            {/* Matches the PresentationSites treatment: one screenshot, full-bleed at
+                the top of the card. Padding moved to the inner Column so the image can
+                reach the border instead of floating inside a margin. */}
+            {heroBySlug.get(project.slug) && (
+              <Media
+                aspectRatio="16 / 9"
+                sizes="(max-width: 768px) 100vw, 720px"
+                alt={`${project.name} — screenshot`}
+                src={heroBySlug.get(project.slug) as string}
+              />
+            )}
+
+            <Column fillWidth gap="16" padding="l">
+              {/* Name + one-line summary. The id follows SPEC.md §3.7.10's
                 convention: the string the TOC scrolls to is the visible name. */}
-            <Column fillWidth gap="4">
-              <Text id={project.name} variant="heading-strong-l">
-                {project.name}
-              </Text>
-              <Text variant="body-default-m" onBackground="neutral-weak">
-                {project.summary}
-              </Text>
-            </Column>
-
-            {/* Role and team shape. Contribution phrasing lives in the data
-                (content-spec.md §2); this only prints it. */}
-            <Row fillWidth gap="8" wrap vertical="center">
-              <Text variant="label-default-s" onBackground="brand-weak">
-                {project.role}
-              </Text>
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                ·
-              </Text>
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                {project.teamShape}
-              </Text>
-            </Row>
-
-            {/* 2–4 sentence description. */}
-            <Text variant="body-default-m">{project.description}</Text>
-
-            {/* Stack tags. Plain strings, not IconName — no prefixIcon here. */}
-            {project.stack.length > 0 && (
-              <Row fillWidth wrap gap="8">
-                {project.stack.map((technology) => (
-                  <Tag key={`${project.slug}-${technology}`} size="l">
-                    {technology}
-                  </Tag>
-                ))}
-              </Row>
-            )}
-
-            {/* 3–4 highlights, verb-first, one anchor each. */}
-            {project.highlights.length > 0 && (
-              <Column as="ul" gap="12" paddingY="4">
-                {project.highlights.map((highlight, index) => (
-                  <Text as="li" variant="body-default-m" key={`${project.slug}-highlight-${index}`}>
-                    {highlight}
-                  </Text>
-                ))}
+              <Column fillWidth gap="4">
+                <Text id={project.name} variant="heading-strong-l">
+                  {project.name}
+                </Text>
+                <Text variant="body-default-m" onBackground="neutral-weak">
+                  {project.summary}
+                </Text>
               </Column>
-            )}
 
-            {/* Links. An empty array renders nothing — a project whose repo is
+              {/* Role and team shape. Contribution phrasing lives in the data
+                (content-spec.md §2); this only prints it. */}
+              <Row fillWidth gap="8" wrap vertical="center">
+                <Text variant="label-default-s" onBackground="brand-weak">
+                  {project.role}
+                </Text>
+                <Text variant="label-default-s" onBackground="neutral-weak">
+                  ·
+                </Text>
+                <Text variant="label-default-s" onBackground="neutral-weak">
+                  {project.teamShape}
+                </Text>
+              </Row>
+
+              {/* 2–4 sentence description. */}
+              <Text variant="body-default-m">{project.description}</Text>
+
+              {/* Stack tags. Plain strings, not IconName — no prefixIcon here. */}
+              {project.stack.length > 0 && (
+                <Row fillWidth wrap gap="8">
+                  {project.stack.map((technology) => (
+                    <Tag key={`${project.slug}-${technology}`} size="l">
+                      {technology}
+                    </Tag>
+                  ))}
+                </Row>
+              )}
+
+              {/* 3–4 highlights, verb-first, one anchor each. */}
+              {project.highlights.length > 0 && (
+                <Column as="ul" gap="12" paddingY="4">
+                  {project.highlights.map((highlight, index) => (
+                    <Text
+                      as="li"
+                      variant="body-default-m"
+                      key={`${project.slug}-highlight-${index}`}
+                    >
+                      {highlight}
+                    </Text>
+                  ))}
+                </Column>
+              )}
+
+              {/* Links. An empty array renders nothing — a project whose repo is
                 private or whose disclosure is unresolved simply has no links,
                 rather than a dead one. */}
-            {project.links.length > 0 && (
-              <Row fillWidth wrap gap="8" data-border="rounded">
-                {project.links.map((link) => (
-                  <Button
-                    key={`${project.slug}-${link.href}`}
-                    href={link.href}
-                    label={link.label}
-                    suffixIcon="arrowUpRight"
-                    size="s"
-                    weight="default"
-                    variant="secondary"
-                  />
-                ))}
-              </Row>
-            )}
+              {project.links.length > 0 && (
+                <Row fillWidth wrap gap="8" data-border="rounded">
+                  {project.links.map((link) => (
+                    <Button
+                      key={`${project.slug}-${link.href}`}
+                      href={link.href}
+                      label={link.label}
+                      suffixIcon="arrowUpRight"
+                      size="s"
+                      weight="default"
+                      variant="secondary"
+                    />
+                  ))}
+                </Row>
+              )}
 
-            {/* The receipt. Guaranteed present: the gate above already
+              {/* The receipt. Guaranteed present: the gate above already
                 established that `ownership` is measured. */}
-            {project.ownership && <OwnershipBlock ownership={project.ownership} />}
+              {project.ownership && <OwnershipBlock ownership={project.ownership} />}
+            </Column>
           </Column>
         ))}
       </Column>
