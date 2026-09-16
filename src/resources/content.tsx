@@ -641,6 +641,55 @@ const projects: Project[] = [
     provenance: "proven",
   },
   {
+    slug: "smart-city-traffic",
+    name: "Smart City Traffic Management Platform",
+    summary:
+      "A municipal traffic-control dashboard: roads, intersections, signal timing and incidents for a whole city, driven by live IoT telemetry.",
+    description:
+      "An enterprise dashboard for municipal traffic authorities, covering the city's road network, intersections, traffic signs and signal infrastructure in one operational view. Live IoT telemetry feeds a map overlay, per-road congestion levels and an incident queue, alongside signal-timing control, maintenance and road-works tracking, system-health monitoring, and role-based access for operator teams.",
+    // TODO(razvan): your role. Cyber Koala's case study describes the platform, not who
+    // built which part of it, and there is no repo here to measure. Name what you owned.
+    role: "TODO(razvan): the specific areas you built",
+    // The client is named only as a municipality on the Cyber Koala page. Left as-is
+    // rather than guessed at, and the team size is not stated there at all.
+    teamShape: "TODO(razvan): agency project for a municipal client \u2014 team size not stated",
+    // Stack as published by Cyber Koala on the case-study page, 2026-09-16. Unlike the
+    // Techno Music World entry this is not read from a served page — the product is a
+    // private municipal dashboard — so it is a claim by the agency, not a measurement.
+    stack: [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Node.js",
+      "PostgreSQL",
+      "WebSocket",
+      "Maps API",
+      "IoT Integration",
+    ],
+    // TODO(razvan): highlights are claims about your own work and cannot be lifted from
+    // an agency case study. Three or four, verb-first, scoped to what you did.
+    //
+    // Deliberately NOT carried over: Cyber Koala's page claims a "60% reduction in
+    // incident response time". content-spec.md §6 rule 1 forbids publishing a metric
+    // that has not been verified, and an agency's own marketing copy is not a source
+    // for a number on your CV. If the measurement is real and you can show it, it can
+    // go in — with whatever produced it named alongside.
+    highlights: [],
+    links: [
+      {
+        label: "View case study on cyberkoala.ro",
+        href: "https://cyberkoala.ro/portofoliu/platforma-smart-city-management-trafic",
+      },
+    ],
+    // Weaker footing than the other "deployed" entries, and worth being clear about.
+    // A municipal dashboard has no public URL, so the only linkable artifact is Cyber
+    // Koala's own portfolio page — the agency describing its own work. A reader can
+    // check that the project is presented publicly; they cannot check the product.
+    // The link label says "case study" rather than "visit" so the page does not imply
+    // otherwise. Upgrade to "proven" if the repo becomes reachable.
+    provenance: "deployed",
+  },
+  {
     slug: "techno-music-world",
     name: "Techno Music World",
     summary:
