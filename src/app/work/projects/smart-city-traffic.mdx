@@ -31,47 +31,5 @@ across the whole stack: the Next.js operator interface, the Node.js API behind i
 model, and the realtime path carrying IoT telemetry to the screen. It was not a solo build — the
 codebase was shared, and this page does not claim otherwise.
 
-## A note on sourcing
-
-Everything above is drawn from Cyber Koala's own case study, not from the product. A municipal
-dashboard has no public URL, and there is no repository on this machine, so nothing here has been
-independently verified the way the Techno Music World entry's stack was read out of its served
-HTML. The screenshots are the agency's published ones, and they show demo instances rather than a
-live municipal tenant.
-
-Cyber Koala's page also claims a 60% reduction in incident response time. That number is not on
-this page and should not be added to it unless you can say who measured it and how — an agency's
-marketing copy is not a source for a figure on your own CV.
-
-TODO(razvan): if the repo can be reached, this section is replaced by a measured ownership block
-and the entry upgrades from "deployed" to "proven".
-
-## Real-time architecture
-
-The interesting engineering problem here is the live path: telemetry from field devices reaching
-an operator's screen fast enough to act on, without the dashboard degrading as the number of
-monitored intersections grows.
-
-This was part of my scope. TODO(razvan): the specifics are the strongest thing you could put on
-this page and they have to come from you — what the update model was (push per event, batched
-ticks, or polling behind a socket), what degraded first as the monitored set grew, and what fixed
-it. Write it from what you remember doing, not from the feature list.
-
-## Signal control
-
-Traffic-light control is the part of this product that actually changes what happens on a street,
-which makes it the part where correctness matters most.
-
-TODO(razvan): you built the API and the UI, so the control surface and whatever guards sit behind
-a manual override were yours to describe. Two or three sentences on how a signal change is issued
-and what prevents an unsafe one.
-
-## Challenges and Learnings
-
-TODO(razvan): two or three, one H3 each, scoped to your own work rather than the platform's
-feature list.
-
-## Outcome
-
-TODO(razvan): no verified outcome numbers exist for this project. See the sourcing note above
-before putting a figure here.
+The screenshots are Cyber Koala's published ones and show demo instances rather than a live
+municipal tenant. The product itself is a private municipal system with no public URL.
