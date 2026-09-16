@@ -1,6 +1,10 @@
 import { Column, Heading } from "@once-ui-system/core";
-import { work } from "@/resources";
+import { presentationSites, work } from "@/resources";
 import { Projects } from "@/components/work/Projects";
+import {
+  PRESENTATION_TITLE,
+  PresentationSites,
+} from "@/components/about/PresentationSites";
 import { JsonLd } from "@/components";
 import { ogImagePath, pageMetadata } from "@/utils/seo";
 
@@ -27,6 +31,11 @@ export default function Work() {
         {work.title}
       </Heading>
       <Projects />
+
+      {/* Presentation websites close the page, under the case studies. The component
+          runs the evidence gate itself and returns null when nothing clears it, so no
+          guard is needed here — an empty section cannot render a stray heading. */}
+      <PresentationSites title={PRESENTATION_TITLE} sites={presentationSites} />
     </Column>
   );
 }

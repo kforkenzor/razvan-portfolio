@@ -15,6 +15,13 @@ import { filterByEvidenceGate } from "./evidence";
  * and no live URL does not render, regardless of which section it sits in.
  * ========================================================================== */
 
+/**
+ * The section heading, exported because two routes render this section: /about,
+ * where it also feeds the table of contents, and /work, where it sits under the
+ * case studies. One string, so the TOC entry and the heading cannot drift.
+ */
+export const PRESENTATION_TITLE = "Presentation Websites";
+
 interface PresentationSitesProps {
   title: string;
   sites: PresentationSite[];

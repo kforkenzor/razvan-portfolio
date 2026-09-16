@@ -19,7 +19,7 @@ import { ogImagePath, pageMetadata } from "@/utils/seo";
 import TableOfContents from "@/components/about/TableOfContents";
 import KeyAchievements from "@/components/about/KeyAchievements";
 import SelectedProjects from "@/components/about/SelectedProjects";
-import { PresentationSites } from "@/components/about/PresentationSites";
+import { PRESENTATION_TITLE, PresentationSites } from "@/components/about/PresentationSites";
 import { filterByEvidenceGate } from "@/components/about/evidence";
 import styles from "@/components/about/about.module.scss";
 
@@ -50,7 +50,6 @@ import styles from "@/components/about/about.module.scss";
 const PROJECTS_TITLE = "Projects";
 
 /** Section heading and anchor id for the lighter client-site section. */
-const PRESENTATION_TITLE = "Presentation Websites";
 
 export async function generateMetadata() {
   return pageMetadata({
