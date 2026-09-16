@@ -1,18 +1,16 @@
-Screenshots for the Techno Music World case study.
+Screenshots for the Techno Music World case study, captured from the live site
+on 2026-09-16 and resized to 1600px wide with `sips --resampleWidth 1600`.
 
-Drop files here named exactly:
+  01-home.png     homepage — breaking-news hero
+  02-music.png    /music — Discover Music, weekly top tracks and favourites
+  03-events.png   /events — the festivals and events listing grid
 
-  01-home.png       homepage — the hero and featured rail
-  02-events.png     /events — the listing grid
-  03-news.png       /news — the news index
-  04-article.png    any single /articles/<slug> page
+All three are listed in the `images:` frontmatter of
+src/app/work/projects/techno-music-world.mdx. images[0] (01-home.png) is the
+detail-page hero, carousel slide 1, and the card thumbnail on /about.
 
-They are already listed in the `images:` frontmatter of
-src/app/work/projects/techno-music-world.mdx, so the carousel and the
-detail-page hero pick them up as soon as the files exist. images[0]
-(01-home.png) is both the hero and carousel slide 1.
-
-Capture on macOS with Cmd+Shift+4, or Cmd+Shift+5 for a window.
-
-TODO(razvan): convert to WebP at ~1600px wide (SPEC.md §12 #16) and rename
-the extensions in the .mdx frontmatter to match.
+PNG rather than WebP to match qr-advanced/, wellnessinbox/ and casa-teo/, which
+are all 1600px PNGs. SPEC.md §12 #16 asks for WebP; no encoder (cwebp,
+ImageMagick) is installed on this machine and sips cannot write WebP, so the
+conversion is still outstanding for every project folder, not just this one.
+Page weight is unaffected either way — Next.js re-encodes at serve time.
