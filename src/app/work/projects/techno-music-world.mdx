@@ -1,0 +1,79 @@
+---
+title: "Techno Music World"
+publishedAt: "2026-09-16"
+summary: "A global techno discovery platform — events, artists, news, editorial and a glossary — published from a headless CMS and wired for music-specific structured data."
+# Empty on purpose: a path here whose file does not exist renders a broken hero and a
+# broken carousel slide on the live site, so the list stays empty until the screenshots
+# are actually captured. Same reasoning as yt-newsletter-backend.mdx, different cause.
+# TODO(razvan): capture the four screenshots named in
+# public/images/projects/techno-music-world/README.txt, convert to WebP at ~1600px wide
+# (SPEC.md §12 #16), then replace the empty list below with:
+#   - "/images/projects/techno-music-world/01-home.webp"
+#   - "/images/projects/techno-music-world/02-events.webp"
+#   - "/images/projects/techno-music-world/03-news.webp"
+#   - "/images/projects/techno-music-world/04-article.webp"
+images: []
+team:
+  - name: "Razvan Calota"
+    role: "Contributor"
+    avatar: "/images/avatar.jpeg"
+    linkedIn: "https://www.linkedin.com/in/razvan-calota-63492424a/"
+link: "https://technomusicworld.com/"
+---
+
+## Overview
+
+Techno Music World is a live content platform for the global techno scene, organised into six
+sections — events, artists, music, news, articles and a glossary — each with its own route tree
+and all of them published from Sanity.
+
+TODO(razvan): this page describes a codebase you contributed to rather than one you own, and the
+distinction has to be made here, in the first paragraph, the way it is on the AI Newsletter
+Delivery page. State what your scope was. Everything below this line is structured around that
+answer, so it is the one thing that unblocks the rest.
+
+TODO(razvan): give the date window. "Contributed between X and Y" is a fact you have and I do not.
+
+## What was verified, and what was not
+
+The technical description on this page was read out of the served HTML of technomusicworld.com on
+2026-09-16 — Next.js build output, 394 references to the Sanity CDN, Tailwind utility classes with
+custom theme tokens, self-hosted Atiga display faces, and a JSON-LD layer emitting `MusicGroup`,
+`MusicRecording`, `ItemList`, `SearchAction`, `Organization` and `WebSite`.
+
+That evidence establishes what the platform *is*. It establishes nothing about who wrote which
+part of it, and there is no repository reachable from this machine to measure. The entry therefore
+carries `provenance: "deployed"`, whose own type documentation warns that authorship under it is
+asserted rather than measured.
+
+TODO(razvan): if you can get the repo onto this machine, the ownership can be measured the way
+OWNERSHIP.md measures everything else, and this section gets deleted in favour of a real commit
+count. That is the version worth having.
+
+## Content architecture
+
+TODO(razvan): six sections sharing one Sanity dataset is the interesting structural problem here —
+how the schemas relate, what an artist document has to carry so that it can be referenced from an
+event and a release, and how the routes are generated. Write the parts you worked on.
+
+## Structured data
+
+The JSON-LD is the most distinctive thing visible from outside: the pages emit music-domain
+schema.org types rather than generic `Article` markup, which is what makes artists and releases
+legible to search engines as music entities.
+
+TODO(razvan): if the structured-data layer was yours, this is the strongest section on the page —
+say which types you modelled and what problem each one solved. If it was not yours, cut this
+section down to a sentence in the Overview and do not imply otherwise.
+
+## Challenges and Learnings
+
+TODO(razvan): two or three, one H3 each, scoped to your own work. The same framing note from the
+newsletter case study applies — "a specific problem I owned inside a larger system" is a stronger
+and more honest story than an implied claim on the whole platform.
+
+## Outcome
+
+TODO(razvan): no outcome numbers are established for this project. Do not invent traffic, ranking
+or engagement figures. If you have real ones and they are publishable, put them here; if not,
+describe the outcome in shape rather than magnitude.

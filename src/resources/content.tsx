@@ -640,6 +640,39 @@ const projects: Project[] = [
     ownership: shortFormOwnership,
     provenance: "proven",
   },
+  {
+    slug: "techno-music-world",
+    name: "Techno Music World",
+    summary:
+      "A global techno discovery platform \u2014 events, artists, news, editorial and a glossary \u2014 published from a headless CMS and wired for music-specific structured data.",
+    description:
+      "A Next.js content platform for the global techno scene. Six content sections \u2014 events, artists, music, news, articles and a glossary \u2014 are authored in Sanity and server-rendered, each with its own route tree. The structured-data layer is the unusual part: rather than generic Article markup, pages emit music-domain schema.org types so that artists, releases and listings are machine-readable to search engines.",
+    // TODO(razvan): your role. You told me this was a partial contribution, not the whole
+    // build, and nothing in the served HTML can tell me which parts were yours. Name the
+    // areas you actually owned and this becomes a real sentence. Until then it is a
+    // placeholder, not a claim.
+    role: "TODO(razvan): the specific areas you built",
+    teamShape: "TODO(razvan): shared codebase \u2014 contribution scope not yet stated",
+    // Verified 2026-09-16 by reading the served HTML of https://technomusicworld.com/:
+    // `/_next/static/` and `/_next/image?url=` (Next.js), 394 `cdn.sanity.io` references
+    // against project `wn8y9ec7` (Sanity), Tailwind utility classes including custom
+    // `text-theme-*` tokens, self-hosted Atiga woff2 faces, and JSON-LD carrying
+    // MusicGroup, MusicRecording, ItemList, SearchAction, Organization and WebSite.
+    // TypeScript is NOT listed: it is likely, but a served page cannot prove it.
+    stack: ["React", "Next.js", "Sanity", "Tailwind CSS", "Structured Data"],
+    // TODO(razvan): highlights are claims about YOUR work, so they cannot be written from
+    // the outside of a site you partly contributed to. Three or four, verb-first, one
+    // concrete anchor each, scoped to what you did rather than what the platform does.
+    highlights: [],
+    links: [{ label: "Visit technomusicworld.com", href: "https://technomusicworld.com/" }],
+    // "deployed" because the live site is the only evidence reachable from here \u2014 there is
+    // no repo on this machine to measure. Note the type's own warning: authorship under
+    // this provenance is ASSERTED, not measured. For a partial contribution that is a
+    // weaker footing than it is for a solo product, which is exactly why `role` and
+    // `highlights` above stay empty rather than being filled in with plausible guesses.
+    // Upgrade to "proven" the moment the repo is reachable.
+    provenance: "deployed",
+  },
 ];
 
 /* --------------------------------------------------------------------------
