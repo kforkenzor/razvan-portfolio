@@ -26,9 +26,10 @@ per-road congestion levels and an incident queue, with signal-timing control, ma
 road-works tracking, system-health monitoring and role-based access for operator teams alongside
 it. Cyber Koala dates the build 2024–2025.
 
-TODO(razvan): your scope, in the first paragraph, before anything else on this page. This is an
-agency project for a municipal client, and the case study it is drawn from describes the platform
-rather than who built which part. Say what you owned.
+I built this as a contract developer for Cyber Koala, the agency that took the project, working
+across the whole stack: the Next.js operator interface, the Node.js API behind it, the PostgreSQL
+model, and the realtime path carrying IoT telemetry to the screen. It was not a solo build — the
+codebase was shared, and this page does not claim otherwise.
 
 ## A note on sourcing
 
@@ -51,17 +52,19 @@ The interesting engineering problem here is the live path: telemetry from field 
 an operator's screen fast enough to act on, without the dashboard degrading as the number of
 monitored intersections grows.
 
-TODO(razvan): if the WebSocket layer, the ingestion path or the map overlay were yours, this is
-the strongest section on the page. What the update model was, what fell over first, and what fixed
-it. If none of it was yours, delete this section rather than describing someone else's work.
+This was part of my scope. TODO(razvan): the specifics are the strongest thing you could put on
+this page and they have to come from you — what the update model was (push per event, batched
+ticks, or polling behind a socket), what degraded first as the monitored set grew, and what fixed
+it. Write it from what you remember doing, not from the feature list.
 
 ## Signal control
 
 Traffic-light control is the part of this product that actually changes what happens on a street,
 which makes it the part where correctness matters most.
 
-TODO(razvan): scope this to what you built — the control surface, the synchronisation model, the
-safeguards around a manual override, or nothing at all if you did not work on it.
+TODO(razvan): you built the API and the UI, so the control surface and whatever guards sit behind
+a manual override were yours to describe. Two or three sentences on how a signal change is issued
+and what prevents an unsafe one.
 
 ## Challenges and Learnings
 

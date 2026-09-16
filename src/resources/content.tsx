@@ -647,12 +647,12 @@ const projects: Project[] = [
       "A municipal traffic-control dashboard: roads, intersections, signal timing and incidents for a whole city, driven by live IoT telemetry.",
     description:
       "An enterprise dashboard for municipal traffic authorities, covering the city's road network, intersections, traffic signs and signal infrastructure in one operational view. Live IoT telemetry feeds a map overlay, per-road congestion levels and an incident queue, alongside signal-timing control, maintenance and road-works tracking, system-health monitoring, and role-based access for operator teams.",
-    // TODO(razvan): your role. Cyber Koala's case study describes the platform, not who
-    // built which part of it, and there is no repo here to measure. Name what you owned.
-    role: "TODO(razvan): the specific areas you built",
-    // The client is named only as a municipality on the Cyber Koala page. Left as-is
-    // rather than guessed at, and the team size is not stated there at all.
-    teamShape: "TODO(razvan): agency project for a municipal client \u2014 team size not stated",
+    /* Role and scope as stated by Razvan on 2026-09-16: contract developer for Cyber
+       Koala, working across all four layers, on a codebase he did not write alone.
+       Both halves of that matter. "Full-stack" is the honest description of the scope;
+       `teamShape` carries the limit, so neither field can be read as sole authorship. */
+    role: "Full-stack developer \u2014 UI, API, data model and the realtime layer",
+    teamShape: "Contract developer for Cyber Koala \u00b7 shared codebase, not sole author",
     // Stack as published by Cyber Koala on the case-study page, 2026-09-16. Unlike the
     // Techno Music World entry this is not read from a served page — the product is a
     // private municipal dashboard — so it is a claim by the agency, not a measurement.
@@ -666,15 +666,22 @@ const projects: Project[] = [
       "Maps API",
       "IoT Integration",
     ],
-    // TODO(razvan): highlights are claims about your own work and cannot be lifted from
-    // an agency case study. Three or four, verb-first, scoped to what you did.
-    //
-    // Deliberately NOT carried over: Cyber Koala's page claims a "60% reduction in
-    // incident response time". content-spec.md §6 rule 1 forbids publishing a metric
-    // that has not been verified, and an agency's own marketing copy is not a source
-    // for a number on your CV. If the measurement is real and you can show it, it can
-    // go in — with whatever produced it named alongside.
-    highlights: [],
+    /* Layer-level claims, not per-feature ones. Razvan named the four layers he worked
+       across; the modules referenced in each line are the ones Cyber Koala publishes for
+       this project. Neither source supports "he personally built feature X", so no line
+       below says that, and none of them claims the work was his alone.
+
+       Deliberately NOT carried over: Cyber Koala's page claims a "60% reduction in
+       incident response time". content-spec.md §6 rule 1 forbids publishing a metric
+       that has not been verified, and an agency's own marketing copy is not a source
+       for a number on your CV. If the measurement is real and you can show it, it can
+       go in — with whatever produced it named alongside. */
+    highlights: [
+      "Worked on the React and Next.js operator interface across the traffic overview, roads, intersections, signal timing and incident views.",
+      "Built Node.js API surface and PostgreSQL data model behind the road network, intersections, signal infrastructure and incident records.",
+      "Worked on the WebSocket path carrying IoT telemetry into the live map overlay, per-road congestion levels and the incident queue.",
+      "Contributed to role-based access for municipal operator teams, alongside maintenance, road-works and system-health tracking.",
+    ],
     links: [
       {
         label: "View case study on cyberkoala.ro",
@@ -696,12 +703,11 @@ const projects: Project[] = [
       "A global techno discovery platform \u2014 events, artists, news, editorial and a glossary \u2014 published from a headless CMS and wired for music-specific structured data.",
     description:
       "A Next.js content platform for the global techno scene. Six content sections \u2014 events, artists, music, news, articles and a glossary \u2014 are authored in Sanity and server-rendered, each with its own route tree. The structured-data layer is the unusual part: rather than generic Article markup, pages emit music-domain schema.org types so that artists, releases and listings are machine-readable to search engines.",
-    // TODO(razvan): your role. You told me this was a partial contribution, not the whole
-    // build, and nothing in the served HTML can tell me which parts were yours. Name the
-    // areas you actually owned and this becomes a real sentence. Until then it is a
-    // placeholder, not a claim.
-    role: "TODO(razvan): the specific areas you built",
-    teamShape: "TODO(razvan): shared codebase \u2014 contribution scope not yet stated",
+    /* Role and scope as stated by Razvan on 2026-09-16: contract developer for Cyber
+       Koala, working across the stack, on a codebase he did not write alone. No realtime
+       or IoT layer exists on this project, so that part of his scope is not claimed here. */
+    role: "Full-stack developer \u2014 UI, API and content architecture",
+    teamShape: "Contract developer for Cyber Koala \u00b7 shared codebase, not sole author",
     // Verified 2026-09-16 by reading the served HTML of https://technomusicworld.com/:
     // `/_next/static/` and `/_next/image?url=` (Next.js), 394 `cdn.sanity.io` references
     // against project `wn8y9ec7` (Sanity), Tailwind utility classes including custom
@@ -709,10 +715,14 @@ const projects: Project[] = [
     // MusicGroup, MusicRecording, ItemList, SearchAction, Organization and WebSite.
     // TypeScript is NOT listed: it is likely, but a served page cannot prove it.
     stack: ["React", "Next.js", "Sanity", "Tailwind CSS", "Structured Data"],
-    // TODO(razvan): highlights are claims about YOUR work, so they cannot be written from
-    // the outside of a site you partly contributed to. Three or four, verb-first, one
-    // concrete anchor each, scoped to what you did rather than what the platform does.
-    highlights: [],
+    /* Layer-level claims scoped to the stack areas Razvan named. Every anchor below is
+       something verified in the served HTML on 2026-09-16 (see the stack note), so the
+       features are real even though the split of authorship is his own account. */
+    highlights: [
+      "Worked on the Next.js frontend across the six content sections \u2014 events, artists, music, news, articles and the glossary \u2014 each with its own route tree.",
+      "Integrated Sanity as the publishing backend, with content modelled so artists, events and releases can reference one another.",
+      "Worked on the music-domain structured data \u2014 MusicGroup, MusicRecording, ItemList and SearchAction \u2014 rather than generic Article markup, making artists and releases legible to search engines as music entities.",
+    ],
     links: [{ label: "Visit technomusicworld.com", href: "https://technomusicworld.com/" }],
     // "deployed" because the live site is the only evidence reachable from here \u2014 there is
     // no repo on this machine to measure. Note the type's own warning: authorship under

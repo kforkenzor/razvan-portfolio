@@ -24,12 +24,12 @@ Techno Music World is a live content platform for the global techno scene, organ
 sections — events, artists, music, news, articles and a glossary — each with its own route tree
 and all of them published from Sanity.
 
-TODO(razvan): this page describes a codebase you contributed to rather than one you own, and the
-distinction has to be made here, in the first paragraph, the way it is on the AI Newsletter
-Delivery page. State what your scope was. Everything below this line is structured around that
-answer, so it is the one thing that unblocks the rest.
+I built this as a contract developer for Cyber Koala, working across the stack — the Next.js
+frontend for all six sections, the API surface, and the Sanity content architecture behind them.
+The codebase was shared rather than mine alone, and this page is scoped to my part of it.
 
-TODO(razvan): give the date window. "Contributed between X and Y" is a fact you have and I do not.
+TODO(razvan): give the date window. "Built between X and Y" is a fact you have and I do not — it
+is the last thing missing from this opening.
 
 ## What was verified, and what was not
 
@@ -59,9 +59,9 @@ The JSON-LD is the most distinctive thing visible from outside: the pages emit m
 schema.org types rather than generic `Article` markup, which is what makes artists and releases
 legible to search engines as music entities.
 
-TODO(razvan): if the structured-data layer was yours, this is the strongest section on the page —
-say which types you modelled and what problem each one solved. If it was not yours, cut this
-section down to a sentence in the Overview and do not imply otherwise.
+This was part of my scope. TODO(razvan): say which types you modelled and what each one solved —
+why an artist is a `MusicGroup` rather than a `Person`, what `ItemList` buys on a listing page,
+and what `SearchAction` exposes. This is the most distinctive engineering on the site.
 
 ## Challenges and Learnings
 
