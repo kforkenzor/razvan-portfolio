@@ -11,7 +11,6 @@ import {
   Line,
 } from "@once-ui-system/core";
 import { work } from "@/resources";
-import { formatDate } from "@/utils/formatDate";
 import { ogImagePath, pageMetadata } from "@/utils/seo";
 import { ScrollToHash, CustomMDX, JsonLd } from "@/components";
 import type { Metadata } from "next";
@@ -93,10 +92,12 @@ export default async function Project({
         <SmartLink href={work.path}>
           <Text variant="label-strong-m">Projects</Text>
         </SmartLink>
-        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
-          {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-        </Text>
-        <Heading variant="display-strong-m">{post.metadata.title}</Heading>
+        {/* No visible published date: a case study is not a dated post, and a stale
+            date reads as a stale project. `publishedAt` still feeds the JSON-LD above,
+            the OG metadata, the sitemap's lastModified and the /work ordering. */}
+        <Heading variant="display-strong-m" marginTop="12">
+          {post.metadata.title}
+        </Heading>
       </Column>
       {team.length > 0 && (
         <Row marginBottom="32" horizontal="center">
