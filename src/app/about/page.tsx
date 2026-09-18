@@ -329,8 +329,13 @@ export default function About() {
                     <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
                       {experience.role}
                     </Text>
+                    {/* `achievements` is the JSX override; every entry currently leaves
+                        it empty, so fall back to the plain `bullets` text. */}
                     <Column as="ul" gap="16">
-                      {experience.achievements.map(
+                      {(experience.achievements.length > 0
+                        ? experience.achievements
+                        : experience.bullets
+                      ).map(
                         (achievement: React.ReactNode, achievementIndex: number) => (
                           <Text
                             as="li"
