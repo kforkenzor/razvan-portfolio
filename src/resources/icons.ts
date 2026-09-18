@@ -34,6 +34,7 @@ import {
   SiRedis,
   SiSupabase,
   SiDrizzle,
+  SiExpo,
   SiTurborepo,
   SiZod,
 } from "react-icons/si";
@@ -74,6 +75,7 @@ export const iconLibrary: Record<string, IconType> = {
   typescript: SiTypescript,
   nextjs: SiNextdotjs,
   react: SiReact,
+  expo: SiExpo,
   nodejs: SiNodedotjs,
   nestjs: SiNestjs,
   postgresql: SiPostgresql,

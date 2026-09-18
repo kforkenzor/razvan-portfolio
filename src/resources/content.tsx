@@ -405,6 +405,24 @@ const about: About = {
         images: [],
       },
       {
+        id: "mobile",
+        label: "Cross-Platform Mobile",
+        title: "Cross-Platform Mobile",
+        // Backed by Magitale, which ships from one codebase to both stores. Razvan
+        // contributed to a shared codebase there rather than owning it — the /work
+        // case study says so, and this row claims the skill, not the authorship.
+        description:
+          "Building cross-platform mobile applications in React Native and Expo from a single TypeScript codebase, taken through both the App Store and Google Play review processes.",
+        technologies: ["React Native", "Expo", "TypeScript"],
+        projects: ["magitale"],
+        tags: [
+          { name: "React Native", icon: "react" },
+          { name: "Expo", icon: "expo" },
+          { name: "TypeScript", icon: "typescript" },
+        ],
+        images: [],
+      },
+      {
         id: "backend",
         label: "Backend & API Development",
         title: "Backend & API Development",
