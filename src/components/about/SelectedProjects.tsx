@@ -2,7 +2,6 @@ import { Button, Column, Heading, Media, Row, Tag, Text } from "@once-ui-system/
 import type { Project } from "@/types";
 import { getProjectPosts } from "@/utils/utils";
 import { filterByEvidenceGate } from "./evidence";
-import { OwnershipBlock } from "./OwnershipBlock";
 
 /* ==========================================================================
  * Selected Projects — content-spec.md §4.4.
@@ -14,7 +13,8 @@ import { OwnershipBlock } from "./OwnershipBlock";
  *
  * Per entry, §4.4 asks for: name, one-line summary, a 2–4 sentence description,
  * role and team shape, stack tags, 3–4 highlights, links, and the ownership
- * block. All nine are rendered below, in that order.
+ * block. The ownership block is not rendered: Razvan removed it from the page
+ * (2026-09-18). It still gates which projects appear, via the filter below.
  *
  * The evidence gate runs here, in code, not in a review checklist. `yt-blog`
  * sits in the data with `provenance: "unverified"` and no `ownership`, and it
@@ -144,10 +144,6 @@ export function SelectedProjects({ title, projects }: SelectedProjectsProps) {
                   ))}
                 </Row>
               )}
-
-              {/* The receipt. Guaranteed present: the gate above already
-                established that `ownership` is measured. */}
-              {project.ownership && <OwnershipBlock ownership={project.ownership} />}
             </Column>
           </Column>
         ))}
