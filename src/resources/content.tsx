@@ -580,6 +580,39 @@ const projects: Project[] = [
     provenance: "deployed",
   },
   {
+    slug: "magitale",
+    name: "Magitale — AI Bedtime Stories",
+    summary:
+      "A React Native bedtime-stories app on iOS and Android: parents generate a personalised, illustrated story for their child and have it narrated in one of four voices.",
+    description:
+      "Parents pick the moral lesson, the characters, the setting and the length, and the app writes an illustrated, chaptered story with the child's own name and age woven through it, then narrates it. Around that sit a library of pre-written stories filtered by age, length and theme, plus lullabies and ambient sounds for the wind-down. One TypeScript codebase in React Native and Expo ships to both stores, backed by a REST API and fronted by a Next.js marketing site on Vercel.",
+    // Scope as Razvan described it in the case study (magitale.mdx): freelance, across the
+    // whole product, roughly 70% frontend, on a shared codebase he contributed to.
+    role: "Full-stack developer — mobile app, generation pipeline, API and marketing site",
+    teamShape: "Freelance engagement · shared codebase, not sole author",
+    stack: ["TypeScript", "React Native", "Expo", "Next.js", "Vercel", "Technical SEO"],
+    highlights: [
+      "Worked on the four-step story wizard — lesson, characters, location, story — with a randomise shortcut and length control, in one React Native and Expo codebase shipped to both stores.",
+      "Built the reading and listening surface: illustrated chapters paired with audio narration, a filterable story library, and a separate player for lullabies and ambient sound.",
+      "Worked on the generation pipeline that turns wizard inputs into chaptered stories with per-scene illustrations and narration in four voices, with a fresh batch generated daily.",
+      "Built the Next.js marketing site with the pages a store listing requires — Terms, Privacy, self-serve account deletion — plus JSON-LD, locale-aware Open Graph cards and an image sitemap.",
+    ],
+    links: [
+      { label: "Visit magitale.com", href: "https://magitale.com" },
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/en/app/magitale-bedtime-stories/id6740749437",
+      },
+      {
+        label: "Google Play",
+        href: "https://play.google.com/store/apps/details?id=com.bedtimestoriesai.app",
+      },
+    ],
+    // "deployed": no repo on this machine to measure. The live site and the two store
+    // listings are the evidence. Upgrade to "proven" once the repo can be measured.
+    provenance: "deployed",
+  },
+  {
     slug: "qr-advanced",
     name: "QR Advanced",
     summary:
