@@ -1,0 +1,93 @@
+---
+title: "Magitale — AI Bedtime Stories"
+publishedAt: "2026-09-18"
+order: 2
+summary: "A bedtime-stories product on iOS and Android: parents generate a personalised, illustrated story for their child and have it narrated in one of four voices."
+# Screenshots captured from the live marketing site on 2026-09-18 and cropped to 1600px
+# wide, matching the other project folders. See public/images/projects/magitale/README.txt.
+# images[0] is the hero and carousel slide 1, and carries both store badges — it is the
+# frame that shows at a glance this is a shipped mobile app, not a web demo.
+images:
+  - "/images/projects/magitale/01-home.png"
+  - "/images/projects/magitale/02-wizard.png"
+  - "/images/projects/magitale/03-guides.png"
+team:
+  - name: "Razvan Calota"
+    role: "Contributor"
+    avatar: "/images/avatar.jpeg"
+    linkedIn: "https://www.linkedin.com/in/razvan-calota-63492424a/"
+link: "https://magitale.com"
+---
+
+## Overview
+
+Magitale turns the bedtime routine into something a parent can generate on the spot. You pick the
+moral lesson you want the story to carry, choose or invent the characters, set the place, time of
+day and weather, and the app writes an illustrated, chaptered story with your child's own name and
+age woven through it — then narrates it in one of four voices. Around that sit a library of
+pre-written stories organised by age, length and theme, plus lullabies and ambient sounds for the
+wind-down.
+
+It ships on both stores as a React Native app, with a Next.js marketing site in front of it.
+
+- [App Store](https://apps.apple.com/en/app/magitale-bedtime-stories/id6740749437)
+- [Google Play](https://play.google.com/store/apps/details?id=com.bedtimestoriesai.app)
+
+I took this on as a freelance engagement and worked across the whole thing — the mobile app, the
+generation pipeline behind it, the API, and the marketing site — with roughly 70% of my time on
+the frontend. It was not a solo build: the codebase was shared and I contributed to it, and this
+page does not claim otherwise.
+
+## The app
+
+One TypeScript codebase in React Native and Expo, shipped to both stores.
+
+The story wizard is the centre of it: four steps — lesson, characters, location, story — with a
+randomise shortcut for the nights nobody wants to make decisions. Characters can be created from
+scratch or picked from a ready-made cast. Length is a control too, so a five-minute tale and a
+longer adventure come out of the same flow.
+
+The rest of the app is the reading and listening surface: illustrated chapters paired with audio
+narration, a library filtered by age, length and theme, and a separate player for lullabies and
+ambient sound. All of it is designed for a phone held in a dark room, which drove the dark palette
+and the low-contrast motion.
+
+## Generation pipeline
+
+Each story is generated from the wizard inputs — the lesson, the cast, the setting, the child's
+name and age — and comes back chaptered, with illustrations generated per scene and narration
+rendered in four distinct narrator personas. A fresh batch is generated daily so the library keeps
+moving for people who would rather browse than create.
+
+Because the audience is children, the generation path carries prompt and content constraints
+rather than passing model output straight through.
+
+{/* TODO(razvan): provider names are deliberately absent — I did not want to guess. Which model
+    wrote the stories, which service generated the illustrations, and which TTS produced the four
+    voices? Those three names are worth more to a technical reader than the whole paragraph above.
+    Same for the guardrails sentence: say what you actually enforce and it stops being a claim. */}
+
+## API and marketing site
+
+Behind the app sits a REST API covering story generation, the library and accounts, with auth and
+sessions shared between the app and the web surface, entitlements separating the free tier from
+premium stories and narration, generation handled asynchronously so the app never blocks on a long
+job, and storage and delivery for the illustrations and audio.
+
+The marketing site is Next.js App Router on Vercel. Beyond the landing page it carries the parts a
+store listing actually requires: Terms, Privacy, a self-serve account-deletion page for Google
+Play's data-deletion policy, and the ANPC consumer-protection disclosure for the Romanian entity
+operating it. Technical SEO is built in — JSON-LD for the organisation, the application, the
+product and its reviews; Open Graph and Twitter cards with locale alternates for en-US, GB, AU and
+CA; an image sitemap; and a PWA manifest.
+
+## Outcome
+
+{/* TODO(razvan): yours to write, and it is the section an interviewer will actually read.
+    What did shipping a React Native app to both stores teach you that the web work did not?
+    Where did the AI pipeline fight you — latency, cost, output quality, keeping it safe for
+    children? Anything real about usage or revenue belongs here, from you, not from me.
+
+    One caution: magitale.com's structured data advertises a 4.8 rating from ~2,847 ratings.
+    I have not verified that against either store listing and deliberately left it out. If you
+    want a rating on this page, check the live store numbers first and cite those. */}
