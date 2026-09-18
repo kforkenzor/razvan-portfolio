@@ -15,6 +15,7 @@ import {
   HiOutlineQueueList,
   HiOutlineLockClosed,
   HiOutlineCircleStack,
+  HiOutlineDevicePhoneMobile,
   HiOutlineServerStack,
   HiOutlineSparkles,
   HiOutlineCheckCircle,
@@ -63,6 +64,7 @@ export const iconLibrary: Record<string, IconType> = {
   lock: HiOutlineLockClosed,
   database: HiOutlineCircleStack,
   server: HiOutlineServerStack,
+  mobile: HiOutlineDevicePhoneMobile,
   sparkles: HiOutlineSparkles,
   check: HiOutlineCheckCircle,
 

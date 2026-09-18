@@ -155,6 +155,13 @@ export type Achievement = {
   provenance: Provenance;
   /** Required before the card may render — see content-spec.md §3 */
   ownership?: Ownership;
+  /**
+   * Outbound links, read by the evidence gate and not rendered. Only meaningful
+   * when `provenance` is "deployed": the gate then demands a working public
+   * artifact in place of a commit count, so a "deployed" card carrying no link
+   * is refused exactly like an unmeasured one.
+   */
+  links?: Array<{ label: string; href: string }>;
 };
 
 /**

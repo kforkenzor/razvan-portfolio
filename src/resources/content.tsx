@@ -228,8 +228,9 @@ const about: About = {
     // yt-newsletter-backend (70 of 1,068 commits, 6 authors — see OWNERSHIP.md); the
     // gap between that measurement and the scope described is his call, recorded at the
     // matching entry in `projects`.
-    // TODO(razvan): content-spec.md §4.2 wants 5–7 cards. Four exist. A fifth arrives
-    // when yt-blog gets a live URL or a measurable repo.
+    // content-spec.md §4.2 wants 5–7 cards. Five exist: the fifth is Magitale, which
+    // takes the gate's "deployed" path — two live store listings instead of a commit
+    // count. A sixth arrives when yt-blog gets a live URL or a measurable repo.
     items: [
       {
         id: "newsletter-operations-platform",
@@ -269,6 +270,27 @@ const about: About = {
         projects: ["short-form-content-platform"],
         provenance: "proven",
         ownership: shortFormOwnership,
+      },
+      {
+        id: "cross-platform-mobile",
+        icon: "mobile",
+        title: "Cross-Platform Mobile Delivery",
+        body: "Contributed React Native and Expo work to Magitale, a bedtime-stories app live on both the App Store and Google Play, spanning the story-creation flow, the illustrated reader with audio narration, and the generation pipeline behind them.",
+        projects: ["magitale"],
+        // "deployed", not "proven": the codebase is not measurable here, so the gate
+        // requires the public artifact instead — hence the two store listings below.
+        // Promote to "proven" with a real ownership block once the repo is measured.
+        provenance: "deployed",
+        links: [
+          {
+            label: "App Store",
+            href: "https://apps.apple.com/en/app/magitale-bedtime-stories/id6740749437",
+          },
+          {
+            label: "Google Play",
+            href: "https://play.google.com/store/apps/details?id=com.bedtimestoriesai.app",
+          },
+        ],
       },
     ],
   },
