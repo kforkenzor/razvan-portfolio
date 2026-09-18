@@ -361,9 +361,9 @@ const about: About = {
       },
       {
         company: "BLV Development",
-        // TODO(razvan): one-clause descriptor of what BLV Development does. Not derivable
-        // from anything on this machine.
-        descriptor: "TODO(razvan): what BLV Development does",
+        // Descriptor supplied by Razvan 2026-09-18: the work here was React and React
+        // Native, which the bullets below already evidence (4 websites, 1 mobile app).
+        descriptor: "React & React Native Development",
         location: "Bucharest, RO - Hybrid",
         start: "Apr 2021",
         end: "Nov 2021",

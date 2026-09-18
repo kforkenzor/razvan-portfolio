@@ -13,9 +13,22 @@ import type {
  * Resolution order, first usable value wins:
  *
  *   1. NEXT_PUBLIC_SITE_URL — the real domain, set per deploy environment.
- *   2. NEXT_PUBLIC_VERCEL_URL — injected per-deployment by Vercel, so preview
- *      builds self-reference their own URL instead of advertising production.
- *   3. http://localhost:3000, for local dev.
+ *   2. PRODUCTION_URL — the domain itself, hardcoded below.
+ *   3. NEXT_PUBLIC_VERCEL_URL — injected per-deployment by Vercel.
+ *   4. http://localhost:3000, for local dev.
+ *
+ * Why 2 exists, and why it sits above the Vercel URL. Until razvancalota.com was
+ * bought (2026-09-18) there was no real domain, so every build fell through to
+ * NEXT_PUBLIC_VERCEL_URL — and production shipped canonicals, OG images and a
+ * sitemap all pointing at razvan-portfolio-<hash>.vercel.app, a deployment that
+ * answers 302 to anyone not signed into the Vercel account. Link previews were
+ * dead everywhere the site was shared, and Google was being handed a protected
+ * origin as canonical. A known origin belongs in the source, not in a dashboard
+ * field that silently reverts the site to that state when it is missing.
+ *
+ * Preview deployments now advertise production URLs too. That is the correct
+ * trade: previews are access-protected, so the alternative is not "previews
+ * self-reference", it is "previews advertise a URL nobody can open".
  *
  * "Usable" is doing real work here. An env var that is *defined but empty* is
  * the default state of a Vercel project whose variable was imported from
@@ -27,12 +40,17 @@ import type {
  * scheme when it lacks one (Vercel supplies bare hostnames), and parsed before
  * it is trusted.
  *
- * TODO(razvan): set NEXT_PUBLIC_SITE_URL to the real domain once it exists.
  */
+const PRODUCTION_URL = "https://razvancalota.com";
+
 function resolveBaseURL(): string {
   // Written as literal `process.env.X` member expressions so the bundler can
   // inline them for the client. Do not refactor into dynamic lookups.
-  const candidates = [process.env.NEXT_PUBLIC_SITE_URL, process.env.NEXT_PUBLIC_VERCEL_URL];
+  const candidates = [
+    process.env.NEXT_PUBLIC_SITE_URL,
+    PRODUCTION_URL,
+    process.env.NEXT_PUBLIC_VERCEL_URL,
+  ];
 
   for (const candidate of candidates) {
     const value = candidate?.trim();
